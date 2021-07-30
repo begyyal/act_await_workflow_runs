@@ -57,7 +57,6 @@ async function run() {
   while (!timeoutFlag && await workflowIsRunning(repos, config, workflowName)) {
     await sleep(INTERVAL_SEC)
     timeoutFlag = new Date() - start > timeoutSec * 1000;
-    console.log(count++);
   }
 
   if (timeoutFlag)
