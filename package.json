@@ -1,0 +1,25 @@
+{
+  "name": "act_sequential_execution",
+  "version": "1.0.0",
+  "description": "Wait for the workflow execution to cpmplete.",
+  "main": "main.js",
+  "scripts": {
+    "build": "ncc build --license LICENSE"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/begyyal/act_sequential_execution.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/begyyal/act_sequential_execution/issues"
+  },
+  "homepage": "https://github.com/begyyal/act_sequential_execution#readme",
+  "dependencies": {
+    "@actions/core": "^1.4.0",
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,16 @@
+name: 'Wait a completion of workflows execution'
+inputs:
+  timeoutSec:
+    required: true
+  workflowName:
+    required: false
+    default: ''
+  repos:
+    required: false
+    default: ${{ github.repository }}
+  token:
+    required: false
+    default: ${{ github.token }}
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
