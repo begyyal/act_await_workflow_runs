@@ -1,4 +1,4 @@
-name: 'Wait a completion of workflows execution'
+name: 'Wait workflows runs'
 inputs:
   timeoutSec:
     required: true
