@@ -1,5 +1,5 @@
 {
-  "name": "act_sequential_execution",
+  "name": "act_await_wf_completion",
   "version": "1.0.0",
   "description": "Wait for the workflow execution to cpmplete.",
   "main": "main.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/begyyal/act_sequential_execution.git"
+    "url": "git+https://github.com/begyyal/act_await_wf_completion.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/begyyal/act_sequential_execution/issues"
+    "url": "https://github.com/begyyal/act_await_wf_completion/issues"
   },
-  "homepage": "https://github.com/begyyal/act_sequential_execution#readme",
+  "homepage": "https://github.com/begyyal/act_await_wf_completion#readme",
   "dependencies": {
     "@actions/core": "^1.4.0",
     "axios": "^0.21.1"
