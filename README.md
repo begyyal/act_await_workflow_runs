@@ -3,7 +3,7 @@
 # Overview
 
 This is a Github Action.  
-Wait for the workflow execution to cpmplete.  
+Wait for workflow executions to complete.  
 
 ## Premise
 
