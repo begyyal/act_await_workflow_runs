@@ -3234,16 +3234,18 @@ const RETRY_COUNT = 3;
 const INTERVAL_SEC = 3;
 
 async function workflowIsRunning(repos, config, workflowName) {
-  return await workflowIsRunning(repos, config, workflowName, 'queued')
-    || await workflowIsRunning(repos, config, workflowName, 'in_progress');
+  let a = await workflowIsRunning(repos, config, workflowName, 'queued');
+  let b = await workflowIsRunning(repos, config, workflowName, 'in_progress');
+  console.log('queued -> ' + a);
+  console.log('in_progress -> ' + b);
+  return a || b;
 }
 
 async function workflowIsRunning(repos, config, workflowName, status) {
   config.params.status = status;
   const res = await request(repos, config, RETRY_COUNT);
-  return workflowName
-    ? res.data.workflow_runs.some(wfr => wfr.name == workflowName)
-    : res.data.total_count != 0;
+  return res.data.total_count != 0
+    && (!workflowName || res.data.workflow_runs.some(wfr => wfr.name == workflowName));
 }
 
 async function request(repos, config, count) {
