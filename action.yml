@@ -1,7 +1,5 @@
 name: 'Wait workflows completion'
 inputs:
-  timeoutSec:
-    required: true
   workflowName:
     required: false
     default: ''
@@ -11,6 +9,9 @@ inputs:
   token:
     required: false
     default: ${{ github.token }}
+  timeoutSec:
+    required: false
+    default: 120
 runs:
   using: 'node12'
   main: 'dist/index.js'

@@ -35,8 +35,8 @@ function sleep(sec) {
 
 async function run() {
 
-  const repos = core.getInput('repos', { required: true });
-  const timeoutSec = core.getInput('timeoutSec', { required: true });
+  const repos = core.getInput('repos');
+  const timeoutSec = core.getInput('timeoutSec');
   const workflowName = core.getInput('workflowName');
   const token = core.getInput('token');
 
