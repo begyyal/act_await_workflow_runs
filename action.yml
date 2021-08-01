@@ -1,4 +1,4 @@
-name: 'Wait workflows completion'
+name: 'Await workflows completion'
 inputs:
   workflowName:
     required: false
