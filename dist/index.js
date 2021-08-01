@@ -3233,26 +3233,30 @@ const axios = __nccwpck_require__(992);
 const RETRY_COUNT = 3;
 const INTERVAL_SEC = 3;
 
-async function workflowIsRunning(repos, config, workflowName) {
-  return await workflowExists(repos, config, workflowName, 'queued')
-    || await workflowExists(repos, config, workflowName, 'in_progress');
+const WF_NAME = core.getInput('workflowName');
+const TIMEOUT_MSEC = core.getInput('timeoutSec') * 1000;
+const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
+
+async function workflowIsRunning(config) {
+  return await workflowExists(config, 'queued')
+    || await workflowExists(config, 'in_progress');
 }
 
-async function workflowExists(repos, config, workflowName, status) {
+async function workflowExists(config, status) {
   config.params.status = status;
-  const res = await request(repos, config, RETRY_COUNT);
+  const res = await request(config, RETRY_COUNT);
   return res.data.total_count != 0
-    && (!workflowName || res.data.workflow_runs.some(wfr => wfr.name == workflowName));
+    && (!WF_NAME || res.data.workflow_runs.some(wfr => wfr.name == WF_NAME));
 }
 
-async function request(repos, config, count) {
+async function request(config, count) {
 
-  const res = await axios.get('/repos/' + repos + '/actions/runs', config);
+  const res = await axios.get(API_PATH, config);
   if (res.status != 200)
-    if (--count < 0)
+    if (count - 1 < 0)
       throw 'Github API did not return 200.';
     else
-      return await request(repos, config, --count);
+      return await request(config, count - 1);
 
   return res;
 }
@@ -3263,16 +3267,11 @@ function sleep(sec) {
 
 async function run() {
 
-  const repos = core.getInput('repos');
-  const timeoutSec = core.getInput('timeoutSec');
-  const workflowName = core.getInput('workflowName');
-  const token = core.getInput('token');
-
   const config = {
     baseURL: 'https://api.github.com/',
     headers: {
       Accept: 'application/vnd.github.v3+json',
-      Authorization: 'token ' + token
+      Authorization: 'token ' + core.getInput('token')
     },
     params: {
       status: ''
@@ -3281,9 +3280,9 @@ async function run() {
 
   let timeoutFlag = false;
   const start = new Date();
-  while (await workflowIsRunning(repos, config, workflowName) && !timeoutFlag) {
+  while (await workflowIsRunning(config) && !timeoutFlag) {
     await sleep(INTERVAL_SEC)
-    timeoutFlag = new Date() - start > timeoutSec * 1000;
+    timeoutFlag = new Date() - start > TIMEOUT_MSEC;
   }
 
   if (timeoutFlag)
