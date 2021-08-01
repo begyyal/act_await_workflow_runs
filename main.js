@@ -20,10 +20,10 @@ async function request(repos, config, count) {
 
   const res = await axios.get('/repos/' + repos + '/actions/runs', config);
   if (res.status != 200)
-    if (--count < 0)
+    if (count - 1 < 0)
       throw 'Github API did not return 200.';
     else
-      return await request(repos, config, --count);
+      return await request(repos, config, count - 1);
 
   return res;
 }
