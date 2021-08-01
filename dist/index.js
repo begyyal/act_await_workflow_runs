@@ -5,7 +5,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_args":[["axios@0.21.1","/home/runner/work/act_await_wf_completion/act_await_wf_completion"]],"_from":"axios@0.21.1","_id":"axios@0.21.1","_inBundle":false,"_integrity":"sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.1","name":"axios","escapedName":"axios","rawSpec":"0.21.1","saveSpec":null,"fetchSpec":"0.21.1"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.1.tgz","_spec":"0.21.1","_where":"/home/runner/work/act_await_wf_completion/act_await_wf_completion","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.10.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"bundlesize":"^0.17.0","coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.0.2","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^20.1.0","grunt-karma":"^2.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^1.0.18","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^1.3.0","karma-chrome-launcher":"^2.2.0","karma-coverage":"^1.1.1","karma-firefox-launcher":"^1.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-opera-launcher":"^1.0.0","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^1.2.0","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.7","karma-webpack":"^1.7.0","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^5.2.0","sinon":"^4.5.0","typescript":"^2.8.1","url-search-params":"^0.10.0","webpack":"^1.13.1","webpack-dev-server":"^1.14.1"},"homepage":"https://github.com/axios/axios","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test && bundlesize","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.1"}');
+module.exports = JSON.parse('{"_args":[["axios@0.21.1","/home/runner/work/act_await_wf_execution/act_await_wf_execution"]],"_from":"axios@0.21.1","_id":"axios@0.21.1","_inBundle":false,"_integrity":"sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.1","name":"axios","escapedName":"axios","rawSpec":"0.21.1","saveSpec":null,"fetchSpec":"0.21.1"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.1.tgz","_spec":"0.21.1","_where":"/home/runner/work/act_await_wf_execution/act_await_wf_execution","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.10.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"bundlesize":"^0.17.0","coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.0.2","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^20.1.0","grunt-karma":"^2.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^1.0.18","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^1.3.0","karma-chrome-launcher":"^2.2.0","karma-coverage":"^1.1.1","karma-firefox-launcher":"^1.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-opera-launcher":"^1.0.0","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^1.2.0","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.7","karma-webpack":"^1.7.0","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^5.2.0","sinon":"^4.5.0","typescript":"^2.8.1","url-search-params":"^0.10.0","webpack":"^1.13.1","webpack-dev-server":"^1.14.1"},"homepage":"https://github.com/axios/axios","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test && bundlesize","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.1"}');
 
 /***/ }),
 
@@ -3230,15 +3230,18 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(24);
 const axios = __nccwpck_require__(992);
 
-const RETRY_COUNT = 3;
-const INTERVAL_SEC = 3;
-
 const WF_NAME = core.getInput('workflowName');
+const AWAIT_START_FLAG = core.getInput('awaitStartFlag');
+const START_STATUS = core.getInput('startStatus');
 const TIMEOUT_MSEC = core.getInput('timeoutSec') * 1000;
 const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
+const RETRY_COUNT = core.getInput('retryCount');
+const INTERVAL_SEC = core.getInput('intervalSec');
 
 async function workflowIsRunning(config) {
-  return await workflowExists(config, 'queued')
+  return AWAIT_START_FLAG
+    ? await workflowExists(config, START_STATUS)
+    : await workflowExists(config, 'queued')
     || await workflowExists(config, 'in_progress');
 }
 
@@ -3253,9 +3256,11 @@ async function request(config, count) {
 
   const res = await axios.get(API_PATH, config);
   if (res.status != 200)
-    if (count - 1 < 0)
+    if (count - 1 < 0) {
+      console.debug(res.status);
+      console.debug(res.data);
       throw 'Github API did not return 200.';
-    else
+    } else
       return await request(config, count - 1);
 
   return res;
@@ -3263,6 +3268,11 @@ async function request(config, count) {
 
 function sleep(sec) {
   return new Promise((resolve) => setTimeout(resolve, sec * 1000));
+}
+
+function validate() {
+  if (AWAIT_START_FLAG && !['queued', 'in_progress'].some(s => s == START_STATUS))
+    throw 'The start status of arguments is invalid.';
 }
 
 async function run() {
@@ -3280,16 +3290,22 @@ async function run() {
 
   let timeoutFlag = false;
   const start = new Date();
-  while (await workflowIsRunning(config) && !timeoutFlag) {
+
+  while ((AWAIT_START_FLAG
+    ? !(await workflowIsRunning(config))
+    : await workflowIsRunning(config))
+    && !timeoutFlag) {
+
     await sleep(INTERVAL_SEC)
     timeoutFlag = new Date() - start > TIMEOUT_MSEC;
   }
 
   if (timeoutFlag)
-    core.setFailed('The workflow runs were not completed while timeoutSec.');
+    core.setFailed('The workflow runs were not completed/started while timeoutSec.');
 }
 
 try {
+  validate();
   run();
 } catch (error) {
   core.setFailed(error.message);
