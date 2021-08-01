@@ -51,7 +51,6 @@ async function run() {
     }
   };
 
-  let count = 0;
   let timeoutFlag = false;
   const start = new Date();
   while (!timeoutFlag && await workflowIsRunning(repos, config, workflowName)) {
