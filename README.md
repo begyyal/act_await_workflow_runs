@@ -5,7 +5,7 @@
 This is a Github Action.  
 Wait for workflow executions to complete or start.  
 
-If you want to wait for the complete, no need to do anything.
+If you want to wait for the complete, no need to do anything.  
 In case of the start, please input something to `awaitStartFlag`. 
 
 ## Premise
