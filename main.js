@@ -61,11 +61,12 @@ async function run() {
 
   let timeoutFlag = false;
   const start = new Date();
-  const continueFunc = () => AWAIT_START_FLAG
-    ? !(await workflowIsRunning(config))
-    : await workflowIsRunning(config);
 
-  while (continueFunc() && !timeoutFlag) {
+  while ((AWAIT_START_FLAG
+    ? !(await workflowIsRunning(config))
+    : await workflowIsRunning(config))
+    && !timeoutFlag) {
+
     await sleep(INTERVAL_SEC)
     timeoutFlag = new Date() - start > TIMEOUT_MSEC;
   }
