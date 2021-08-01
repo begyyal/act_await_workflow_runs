@@ -5,16 +5,12 @@ const RETRY_COUNT = 3;
 const INTERVAL_SEC = 3;
 
 async function workflowIsRunning(repos, config, workflowName) {
-  let a = await workflowIsRunning(repos, config, workflowName, 'queued');
-  let b = await workflowIsRunning(repos, config, workflowName, 'in_progress');
-  console.log('queued -> ' + a);
-  console.log('in_progress -> ' + b);
-  return a || b;
+  return await workflowExists(repos, config, workflowName, 'queued')
+    || await workflowExists(repos, config, workflowName, 'in_progress');
 }
 
-async function workflowIsRunning(repos, config, workflowName, status) {
+async function workflowExists(repos, config, workflowName, status) {
   config.params.status = status;
-  console.log(config);
   const res = await request(repos, config, RETRY_COUNT);
   return res.data.total_count != 0
     && (!workflowName || res.data.workflow_runs.some(wfr => wfr.name == workflowName));
