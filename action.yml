@@ -1,8 +1,14 @@
-name: 'Await workflow completions'
+name: 'Await a workflow execution'
 inputs:
   workflowName:
     required: false
     default: ''
+  awaitStartFlag:
+    required: false
+    default: ''
+  startStatus:
+    required: false
+    default: 'in_progress'
   repos:
     required: false
     default: ${{ github.repository }}
@@ -12,6 +18,12 @@ inputs:
   timeoutSec:
     required: false
     default: 120
+  retryCount:
+    required: false
+    default: 3
+  intervalSec:
+    required: false
+    default: 3
 runs:
   using: 'node12'
   main: 'dist/index.js'
