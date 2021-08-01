@@ -3234,11 +3234,8 @@ const RETRY_COUNT = 3;
 const INTERVAL_SEC = 3;
 
 async function workflowIsRunning(repos, config, workflowName) {
-  let a = await workflowIsRunning(repos, config, workflowName, 'queued');
-  let b = await workflowIsRunning(repos, config, workflowName, 'in_progress');
-  console.log('queued -> ' + a);
-  console.log('in_progress -> ' + b);
-  return a || b;
+  return await workflowIsRunning(repos, config, workflowName, 'queued')
+    || await workflowIsRunning(repos, config, workflowName, 'in_progress');
 }
 
 async function workflowIsRunning(repos, config, workflowName, status) {
@@ -3284,7 +3281,7 @@ async function run() {
 
   let timeoutFlag = false;
   const start = new Date();
-  while (!timeoutFlag && await workflowIsRunning(repos, config, workflowName)) {
+  while (await workflowIsRunning(repos, config, workflowName) && !timeoutFlag) {
     await sleep(INTERVAL_SEC)
     timeoutFlag = new Date() - start > timeoutSec * 1000;
   }
