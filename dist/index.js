@@ -3243,8 +3243,8 @@ async function workflowIsRunning(repos, config, workflowName) {
 
 async function workflowIsRunning(repos, config, workflowName, status) {
   config.params.status = status;
+  console.log(config);
   const res = await request(repos, config, RETRY_COUNT);
-  console.log(res.data);
   return res.data.total_count != 0
     && (!workflowName || res.data.workflow_runs.some(wfr => wfr.name == workflowName));
 }
