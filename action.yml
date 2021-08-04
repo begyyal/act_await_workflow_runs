@@ -38,7 +38,7 @@ inputs:
       Upper limit of count of retrying to call API.
   intervalSec:
     required: false
-    default: 2
+    default: 3
     description: >
       Interval secounds of call API, the call not contained retry.
 runs:

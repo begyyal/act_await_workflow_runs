@@ -61,9 +61,14 @@ async function run() {
       Authorization: 'token ' + core.getInput('token')
     },
     params: {
-      status: ''
+      status: 'queued'
     }
   };
+
+  const res = await request(config, RETRY_COUNT);
+  console.debug('jab.');
+  console.debug('data count -> ' + res.data.total_count);
+  console.debug(res.data.workflow_runs);
 
   let timeoutFlag = false;
   const start = new Date();
