@@ -3246,8 +3246,14 @@ async function workflowIsRunning(config) {
 }
 
 async function workflowExists(config, status) {
+
   config.params.status = status;
   const res = await request(config, RETRY_COUNT);
+  
+  console.debug('Successfully received API response.');
+  console.debug('data count -> ' + res.data.total_count);
+  console.debug(res.data.workflow_runs);
+  
   return res.data.total_count != 0
     && (!WF_NAME || res.data.workflow_runs.some(wfr => wfr.name == WF_NAME));
 }
