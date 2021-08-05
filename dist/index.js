@@ -3270,6 +3270,7 @@ async function request(config, count) {
     throw 'Github REST API did not return a valid response while retry count .';
   }
 
+  await sleep(1);
   return await request(config, count - 1);
 }
 
