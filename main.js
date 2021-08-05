@@ -37,8 +37,7 @@ async function request(config, count) {
   if (res.status != 200)
     console.log('The http status that is response of Github REST API is not success, it is ' + res.status + '.');
   else if (res.data.total_count != res.data.workflow_runs.length)
-    console.log('The response of Github REST API contains a mismatch between \
-      [total_count:' + res.data.total_count + '] and [workflow_runs.length:' + res.data.workflow_runs.length + '].');
+    console.log('The response of Github REST API contains a mismatch between [total_count:' + res.data.total_count + '] and [workflow_runs.length:' + res.data.workflow_runs.length + '].');
   else
     return res;
 
