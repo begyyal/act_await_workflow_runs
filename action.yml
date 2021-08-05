@@ -4,7 +4,8 @@ inputs:
     required: false
     default: ''
     description: >
-      A workflow name of the execution target.
+      A workflow name of the execution target.  
+      By the default, all runs is targeted.
   awaitStartFlag:
     required: false
     default: ''
