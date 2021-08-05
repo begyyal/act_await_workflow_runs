@@ -17,4 +17,5 @@ In case of the start, please input something to `awaitStartFlag`.
 - There is a case that a response of Github REST API contains a mismatch  
 between 'total_count' of the property and 'workflow_runs.length'.  
 This is perhaps a bug in Github side, no way but to try again...  
+Therefore, the calling api logic will retry in this case as well.
 [Here is the API documents.](https://docs.github.com/ja/rest/reference/actions#workflow-runs)
