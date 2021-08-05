@@ -20,11 +20,11 @@ async function workflowExists(config, status) {
 
   config.params.status = status;
   const res = await request(config, RETRY_COUNT);
-  
+
   console.debug('Successfully received API response.');
   console.debug('data count -> ' + res.data.total_count);
   console.debug(res.data.workflow_runs);
-  
+
   return res.data.total_count != 0
     && (!WF_NAME || res.data.workflow_runs.some(wfr => wfr.name == WF_NAME));
 }
@@ -32,15 +32,16 @@ async function workflowExists(config, status) {
 async function request(config, count) {
 
   const res = await axios.get(API_PATH, config);
-  if (res.status != 200)
-    if (count - 1 < 0) {
-      console.debug(res.status);
-      console.debug(res.data);
-      throw 'Github API did not return 200.';
-    } else
-      return await request(config, count - 1);
+  if (res.status == 200 && res.data.total_count == res.data.workflow_runs.length)
+    return res;
 
-  return res;
+  if (count - 1 < 0) {
+    console.debug(res.status);
+    console.debug(res.data);
+    throw 'Github REST API did not return a valid response while retry count .';
+  }
+
+  return await request(config, count - 1);
 }
 
 function sleep(sec) {
@@ -64,11 +65,6 @@ async function run() {
       status: 'queued'
     }
   };
-
-  const res = await request(config, RETRY_COUNT);
-  console.debug('jab.');
-  console.debug('data count -> ' + res.data.total_count);
-  console.debug(res.data.workflow_runs);
 
   let timeoutFlag = false;
   const start = new Date();
