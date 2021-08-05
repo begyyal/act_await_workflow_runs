@@ -11,3 +11,10 @@ In case of the start, please input something to `awaitStartFlag`.
 ## Premise
 
 - [Action's format including inputs.](https://github.com/begyyal/act_sequential_execution/blob/master/action.yml)
+
+## Note
+
+- There is a case that a response of Github REST API contains a mismatch  
+between 'total_count' of the property and 'workflow_runs.length'.  
+This is perhaps a bug in Github side, no way but to try again...  
+[Here is the API documents.](https://docs.github.com/ja/rest/reference/actions#workflow-runs)
