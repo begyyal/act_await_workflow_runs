@@ -6,8 +6,9 @@ const AWAIT_START_FLAG = core.getInput('awaitStartFlag');
 const START_STATUS = core.getInput('startStatus');
 const TIMEOUT_MSEC = core.getInput('timeoutSec') * 1000;
 const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
-const RETRY_COUNT = core.getInput('retryCount');
-const INTERVAL_SEC = core.getInput('intervalSec');
+
+const RETRY_COUNT = 3;
+const INTERVAL_SEC = 3;
 
 async function workflowIsRunning(config) {
   return AWAIT_START_FLAG

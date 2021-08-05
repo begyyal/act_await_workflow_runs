@@ -31,16 +31,6 @@ inputs:
     default: 180
     description: >
       Timeout secounds of total execution time.
-  retryCount:
-    required: false
-    default: 3
-    description: >
-      Upper limit of count of retrying to call API.
-  intervalSec:
-    required: false
-    default: 3
-    description: >
-      Interval secounds of call API, the call not contained retry.
 runs:
   using: 'node12'
   main: 'dist/index.js'
