@@ -3236,20 +3236,20 @@ const START_STATUS = core.getInput('startStatus');
 const TIMEOUT_MSEC = core.getInput('timeoutSec') * 1000;
 const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
 
-const RETRY_COUNT = 3;
+const RETRY_COUNT = 10;
 const INTERVAL_SEC = AWAIT_START_FLAG ? 1 : 3;
 
 async function workflowIsRunning(config) {
   return AWAIT_START_FLAG
-    ? await workflowExists(config, START_STATUS)
-    : await workflowExists(config, 'queued')
-    || await workflowExists(config, 'in_progress');
+    ? await workflowExists(config, START_STATUS).catch(err => { throw err })
+    : await workflowExists(config, 'queued').catch(err => { throw err })
+    || await workflowExists(config, 'in_progress').catch(err => { throw err });
 }
 
 async function workflowExists(config, status) {
 
   config.params.status = status;
-  const res = await request(config, RETRY_COUNT);
+  const res = await request(config, RETRY_COUNT).catch(err => { throw err });
 
   const result = res.data.total_count != 0
     && (!WF_NAME || res.data.workflow_runs.some(wfr => wfr.name == WF_NAME));
@@ -3261,7 +3261,7 @@ async function workflowExists(config, status) {
 
 async function request(config, count) {
 
-  const res = await axios.get(API_PATH, config);
+  const res = await axios.get(API_PATH, config).catch(err => { throw err });
 
   if (res.status != 200)
     console.log('The http status that is response of Github REST API is not success, it is ' + res.status + '.');
@@ -3270,12 +3270,11 @@ async function request(config, count) {
   else
     return res;
 
-  if (count - 1 < 0) {
+  if (count - 1 < 0)
     throw 'Github REST API did not return a valid response while retry count .';
-  }
 
-  await sleep(1);
-  return await request(config, count - 1);
+  await sleep(0.5);
+  return await request(config, count - 1).catch(err => { throw err });
 }
 
 function sleep(sec) {
@@ -3304,8 +3303,8 @@ async function run() {
   const start = new Date();
 
   while ((AWAIT_START_FLAG
-    ? !(await workflowIsRunning(config))
-    : await workflowIsRunning(config))
+    ? !(await workflowIsRunning(config).catch(err => { throw err }))
+    : await workflowIsRunning(config).catch(err => { throw err }))
     && !timeoutFlag) {
 
     await sleep(INTERVAL_SEC)
@@ -3318,7 +3317,7 @@ async function run() {
 
 try {
   validate();
-  run();
+  run().catch(err => { throw err });
 } catch (error) {
   core.setFailed(error.message);
 }
