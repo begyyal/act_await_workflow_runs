@@ -4,9 +4,9 @@ const axios = require('axios');
 const WF_NAME = core.getInput('workflowName');
 const TIMEOUT_MSEC = core.getInput('timeoutSec') * 1000;
 const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
+const INTERVAL_SEC = core.getInput('intervalSec');
 
 const RETRY_COUNT = 10;
-const INTERVAL_SEC = 3;
 
 function owata_(promise) {
   return promise.catch(err => {

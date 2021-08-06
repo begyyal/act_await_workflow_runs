@@ -21,6 +21,11 @@ inputs:
     default: 180
     description: >
       Timeout secounds of total execution time.
+  intervalSec:
+    required: false
+    default: 3
+    description: >
+      Interval secounds of call API, the call not containes retry.
 runs:
   using: 'node12'
   main: 'dist/index.js'
