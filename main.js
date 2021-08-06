@@ -31,8 +31,8 @@ async function checkCompletion(ids) {
 async function getWorkflowStatus(id) {
   const path = API_PATH + '/' + id;
   const res = await owata_(request(path, newConf(), RETRY_COUNT));
-  console.log(id + ' - ' + res.status);
-  return res.status;
+  console.log(id + ' - ' + res.data.status);
+  return res.data.status;
 }
 
 async function request(path, config, count) {
