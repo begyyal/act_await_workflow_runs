@@ -51,15 +51,19 @@ function sleep(sec) {
 }
 
 function newConf(status) {
-  const params = status ? { status: status } : {};
-  return {
+  
+  const conf = {
     baseURL: 'https://api.github.com/',
     headers: {
       Accept: 'application/vnd.github.v3+json',
       Authorization: 'token ' + core.getInput('token')
-    },
-    params: params
+    }
   };
+
+  if (status)
+    conf.params = { status: status };
+
+  return conf;
 }
 
 async function run() {
