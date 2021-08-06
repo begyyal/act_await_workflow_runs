@@ -8,32 +8,36 @@ const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
 const RETRY_COUNT = 10;
 const INTERVAL_SEC = 3;
 
-function through_(promise) {
-  return promise.catch(err => { throw err });
+function owata_(promise) {
+  return promise.catch(err => {
+    core.setFailed(err.message);
+    process.exit(-1);
+  });
 }
 
 async function getWorkflowIds(status) {
-  const res = await through_(request(API_PATH, newConf(status), RETRY_COUNT));
+  const res = await owata_(request(API_PATH, newConf(status), RETRY_COUNT));
   return res.data.workflow_runs
     .filter(wfr => !WF_NAME || wfr.name == WF_NAME)
     .map(wfr => wfr.id);
 }
 
 async function checkCompletion(ids) {
-  return (await through_(Promise
-    .all(ids.map(id => through_(getWorkflowStatus(id))))))
+  return (await Promise
+    .all(ids.map(id => owata_(getWorkflowStatus(id)))))
     .every(s => s == 'completed');
 }
 
 async function getWorkflowStatus(id) {
   const path = API_PATH + '/' + id;
-  const res = await through_(request(path, newConf(), RETRY_COUNT));
+  const res = await owata_(request(path, newConf(), RETRY_COUNT));
+  console.log(id + ' - ' + res.status);
   return res.status;
 }
 
 async function request(path, config, count) {
 
-  const res = await through_(axios.get(path, config));
+  const res = await owata_(axios.get(path, config));
 
   if (res.status != 200)
     console.log('The http status that is response of Github REST API is not success, it is ' + res.status + '.');
@@ -46,7 +50,7 @@ async function request(path, config, count) {
     throw 'Github REST API did not return a valid response while retry count .';
 
   await sleep(0.5);
-  return await through_(request(path, config, count - 1));
+  return await owata_(request(path, config, count - 1));
 }
 
 function sleep(sec) {
@@ -71,8 +75,8 @@ function newConf(status) {
 
 async function run() {
 
-  const ids = (await through_(Promise
-    .all(['queued', 'in_progress'].map(s => through_(getWorkflowIds(s))))))
+  const ids = (await Promise
+    .all(['queued', 'in_progress'].map(s => owata_(getWorkflowIds(s)))))
     .flatMap(arr => arr);
   if (ids.length == 0)
     return;
@@ -80,7 +84,7 @@ async function run() {
   let timeoutFlag = false;
   const start = new Date();
 
-  while (!(await through_(checkCompletion(ids))) && !timeoutFlag) {
+  while (!(await owata_(checkCompletion(ids))) && !timeoutFlag) {
     await sleep(INTERVAL_SEC);
     timeoutFlag = new Date() - start > TIMEOUT_MSEC;
   }
@@ -89,8 +93,4 @@ async function run() {
     core.setFailed('The workflow runs were not completed/started while timeoutSec.');
 }
 
-try {
-  through_(run());
-} catch (error) {
-  core.setFailed(error.message);
-}
+owata_(run());
