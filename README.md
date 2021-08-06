@@ -9,6 +9,10 @@ Wait for a workflow execution to complete.
 
 - [Action's format including inputs.](https://github.com/begyyal/act_sequential_execution/blob/master/action.yml)
 
+## Behavier
+
+- The wait target is only which exists as `queued` or `in_progress` on a start of the Action, will not contains which appears after the start.
+
 ## Note
 
 - There is a case that a response of Github REST API contains a mismatch  
