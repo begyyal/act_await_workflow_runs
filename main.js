@@ -46,7 +46,7 @@ async function request(path, config, count) {
     throw 'Github REST API did not return a valid response while retry count .';
 
   await sleep(0.5);
-  return await through_(request(config, count - 1));
+  return await through_(request(path, config, count - 1));
 }
 
 function sleep(sec) {
