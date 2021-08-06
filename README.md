@@ -13,11 +13,3 @@ Wait for a workflow execution to complete.
 
 - The wait target is only which exists as `queued` or `in_progress` on a start of the Action,  
 will not contains which appears after the start.
-
-## Note
-
-- There is a case that a response of Github REST API contains a mismatch  
-between 'total_count' of the property and 'workflow_runs.length' despite the both less than page count.  
-This happens frequently at `queued` or `in_progress`, and perhaps a bug in Github side.  
-Therefore, the logic of this Action avoids using GET/list with status filtering.  
-[Here is the API documents.](https://docs.github.com/ja/rest/reference/actions#workflow-runs)
