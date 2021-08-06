@@ -3235,7 +3235,7 @@ const TIMEOUT_MSEC = core.getInput('timeoutSec') * 1000;
 const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
 const INTERVAL_SEC = core.getInput('intervalSec');
 
-const RETRY_COUNT = 10;
+const RETRY_COUNT = 3;
 const STR = {
   completed: 'completed',
   queued: 'queued',
@@ -3281,15 +3281,14 @@ async function request(path, config, count) {
 
   const res = await owata_(axios.get(path, config));
 
-  if (res.status != 200)
-    console.log('The http status that is response of Github REST API is not success, it is ' + res.status + '.');
-  else
+  if (res.status == 200)
     return res;
-
-  if (count - 1 < 0)
+  else if (count - 1 < 0)
     throw 'Github REST API did not return a valid response while retry count .';
 
-  await sleep(0.5);
+  console.log('The http status that is response of Github REST API is not success, it is ' + res.status + '.');
+  await sleep(1);
+
   return await owata_(request(path, config, count - 1));
 }
 
