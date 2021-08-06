@@ -6,17 +6,6 @@ inputs:
     description: >
       A workflow name of the execution target.  
       By the default, all runs is targeted.
-  awaitStartFlag:
-    required: false
-    default: ''
-    description: >
-      If input anything in this flag, await a workflow execution to start instead of completion.
-  startStatus:
-    required: false
-    default: 'in_progress'
-    description: >
-      Define the start meaning, it is [queued] or [in_progress].
-      If awaitStartFlag is false, this argument is ignored.
   repos:
     required: false
     default: ${{ github.repository }}

@@ -2,18 +2,14 @@ const core = require('@actions/core');
 const axios = require('axios');
 
 const WF_NAME = core.getInput('workflowName');
-const AWAIT_START_FLAG = core.getInput('awaitStartFlag');
-const START_STATUS = core.getInput('startStatus');
 const TIMEOUT_MSEC = core.getInput('timeoutSec') * 1000;
 const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
 
 const RETRY_COUNT = 10;
-const INTERVAL_SEC = AWAIT_START_FLAG ? 1 : 3;
+const INTERVAL_SEC = 3;
 
 async function workflowIsRunning(config) {
-  return AWAIT_START_FLAG
-    ? await workflowExists(config, START_STATUS).catch(err => { throw err })
-    : await workflowExists(config, 'queued').catch(err => { throw err })
+  return await workflowExists(config, 'queued').catch(err => { throw err })
     || await workflowExists(config, 'in_progress').catch(err => { throw err });
 }
 
@@ -53,8 +49,6 @@ function sleep(sec) {
 }
 
 function validate() {
-  if (AWAIT_START_FLAG && !['queued', 'in_progress'].some(s => s == START_STATUS))
-    throw 'The start status of arguments is invalid.';
 }
 
 async function run() {
@@ -73,10 +67,7 @@ async function run() {
   let timeoutFlag = false;
   const start = new Date();
 
-  while ((AWAIT_START_FLAG
-    ? !(await workflowIsRunning(config).catch(err => { throw err }))
-    : await workflowIsRunning(config).catch(err => { throw err }))
-    && !timeoutFlag) {
+  while (await workflowIsRunning(config).catch(err => { throw err }) && !timeoutFlag) {
 
     await sleep(INTERVAL_SEC)
     timeoutFlag = new Date() - start > TIMEOUT_MSEC;
