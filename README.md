@@ -11,7 +11,8 @@ Wait for a workflow execution to complete.
 
 ## Behavier
 
-- The wait target is only which exists as `queued` or `in_progress` on a start of the Action, will not contains which appears after the start.
+- The wait target is only which exists as `queued` or `in_progress` on a start of the Action,  
+will not contains which appears after the start.
 
 ## Note
 
