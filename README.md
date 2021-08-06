@@ -17,7 +17,7 @@ will not contains which appears after the start.
 ## Note
 
 - There is a case that a response of Github REST API contains a mismatch  
-between 'total_count' of the property and 'workflow_runs.length'.  
-This is perhaps a bug in Github side, no way but to try again...  
+between 'total_count' of the property and 'workflow_runs.length' despite the both less than page count.  
+This happens frequently at `queued` or `in_progress`, and perhaps a bug in Github side, no way but to try again...  
 Therefore, the calling api logic will retry in this case as well.  
 [Here is the API documents.](https://docs.github.com/ja/rest/reference/actions#workflow-runs)
