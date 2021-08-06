@@ -7,6 +7,11 @@ const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
 const INTERVAL_SEC = core.getInput('intervalSec');
 
 const RETRY_COUNT = 10;
+const STR = {
+  completed = 'completed',
+  queued = 'queued',
+  in_progress = 'in_progress'
+};
 
 function owata_(promise) {
   return promise.catch(err => {
@@ -15,17 +20,25 @@ function owata_(promise) {
   });
 }
 
-async function getWorkflowIds(status) {
-  const res = await owata_(request(API_PATH, newConf(status), RETRY_COUNT));
-  return res.data.workflow_runs
-    .filter(wfr => !WF_NAME || wfr.name == WF_NAME)
-    .map(wfr => wfr.id);
+async function getWorkflowIds() {
+
+  // completed以外でのフィルタリングを嫌気してのこれ
+  // https://github.com/begyyal/act_await_wf_execution/issues/1
+  let runs, allRuns = [], count = 1;
+  do {
+    runs = (await owata_(request(API_PATH, newConf(count++), RETRY_COUNT)))
+      .data.workflow_runs
+      .filter(wfr => wfr.status != STR.completed && (!WF_NAME || wfr.name == WF_NAME));
+    Array.prototype.push.apply(allRuns, runs);
+  } while (runs.length == 30);
+
+  return runs.map(wfr => wfr.id);
 }
 
 async function checkCompletion(ids) {
   return (await Promise
     .all(ids.map(id => owata_(getWorkflowStatus(id)))))
-    .every(s => s == 'completed');
+    .every(s => s == STR.completed);
 }
 
 async function getWorkflowStatus(id) {
@@ -41,8 +54,6 @@ async function request(path, config, count) {
 
   if (res.status != 200)
     console.log('The http status that is response of Github REST API is not success, it is ' + res.status + '.');
-  else if (res.data.total_count && res.data.total_count != res.data.workflow_runs.length)
-    console.log('The response of Github REST API contains a mismatch between [total_count:' + res.data.total_count + '] and [workflow_runs.length:' + res.data.workflow_runs.length + '].');
   else
     return res;
 
@@ -57,7 +68,7 @@ function sleep(sec) {
   return new Promise((resolve) => setTimeout(resolve, sec * 1000));
 }
 
-function newConf(status) {
+function newConf(page) {
 
   const conf = {
     baseURL: 'https://api.github.com/',
@@ -67,17 +78,15 @@ function newConf(status) {
     }
   };
 
-  if (status)
-    conf.params = { status: status };
+  if (page)
+    conf.params = { page: page };
 
   return conf;
 }
 
 async function run() {
 
-  const ids = (await Promise
-    .all(['queued', 'in_progress'].map(s => owata_(getWorkflowIds(s)))))
-    .flatMap(arr => arr);
+  const ids = await owata_(getWorkflowIds());
   if (ids.length == 0)
     return;
 
