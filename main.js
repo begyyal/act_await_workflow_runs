@@ -8,9 +8,9 @@ const INTERVAL_SEC = core.getInput('intervalSec');
 
 const RETRY_COUNT = 10;
 const STR = {
-  completed = 'completed',
-  queued = 'queued',
-  in_progress = 'in_progress'
+  completed: 'completed',
+  queued: 'queued',
+  in_progress: 'in_progress'
 };
 
 function owata_(promise) {
