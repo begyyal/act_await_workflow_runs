@@ -3296,7 +3296,7 @@ async function run() {
   const ids = (await Promise
     .all(['queued', 'in_progress'].map(s => getWorkflowIds(s)))
     .catch(err => { throw err }))
-    .flatMap();
+    .flatMap(arr => arr);
   if (ids.length == 0)
     return;
 
@@ -3304,7 +3304,7 @@ async function run() {
   const start = new Date();
 
   while (!(await checkCompletion(ids).catch(err => { throw err })) && !timeoutFlag) {
-    await sleep(INTERVAL_SEC)
+    await sleep(INTERVAL_SEC);
     timeoutFlag = new Date() - start > TIMEOUT_MSEC;
   }
 
