@@ -18,6 +18,6 @@ will not contains which appears after the start.
 
 - There is a case that a response of Github REST API contains a mismatch  
 between 'total_count' of the property and 'workflow_runs.length' despite the both less than page count.  
-This happens frequently at `queued` or `in_progress`, and perhaps a bug in Github side, no way but to try again...  
-Therefore, the calling api logic will retry in this case as well.  
+This happens frequently at `queued` or `in_progress`, and perhaps a bug in Github side.  
+Therefore, the logic of this Action avoids using GET/list with status filtering.  
 [Here is the API documents.](https://docs.github.com/ja/rest/reference/actions#workflow-runs)
