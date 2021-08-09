@@ -5,7 +5,7 @@ inputs:
     default: ''
     description: >
       A workflow name of the execution target.  
-      By the default, all runs  targeted.
+      By the default, all runs are targeted.
   repos:
     required: false
     default: ${{ github.repository }}
