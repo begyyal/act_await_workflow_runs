@@ -1,4 +1,6 @@
 name: 'Await a workflow execution'
+description: 'Wait for a workflow execution to complete.'
+
 inputs:
   workflowName:
     required: false
@@ -29,3 +31,7 @@ inputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+
+branding:
+  icon: 'anchor'
+  color: 'red'
