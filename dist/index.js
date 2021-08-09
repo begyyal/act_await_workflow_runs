@@ -3244,7 +3244,7 @@ const STR = {
 
 function owata_(promise) {
   return promise.catch(err => {
-    core.setFailed(err.message);
+    core.setFailed(err instanceof Error ? err.message : err);
     process.exit(-1);
   });
 }
