@@ -1,5 +1,5 @@
-name: 'Await a workflow execution'
-description: 'Wait for a workflow execution to complete.'
+name: 'Await workflow executions'
+description: 'Wait for workflow executions to complete.'
 
 inputs:
   workflowName:

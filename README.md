@@ -3,7 +3,7 @@
 # Overview
 
 This is a Github Action.  
-Wait for a workflow execution to complete.  
+Wait for workflow executions to complete.  
 
 ## Premise
 
@@ -11,5 +11,5 @@ Wait for a workflow execution to complete.
 
 ## Behavier
 
-- The wait target is only which exists as `queued` or `in_progress` on a start of the Action,  
+- The wait targets is only which exist as `queued` or `in_progress` on a start of the Action,  
 will not contains which appears after the start.
