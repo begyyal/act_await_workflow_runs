@@ -13,3 +13,4 @@ Wait for workflow executions to complete.
 
 - The wait targets is only which exist as `queued` or `in_progress` on a start of the Action,  
 will not contains which appears after the start.
+- The number of references when acquiring the wait targets is latest 30 by default.

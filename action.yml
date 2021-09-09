@@ -28,6 +28,13 @@ inputs:
     default: 3
     description: >
       Interval secounds of call API, the call not containes retry.
+  numOfRef:
+    required: false
+    default: 30
+    description: >
+      The number of references when acquiring the wait targets.
+      This is referenced in order from newest runs.
+
 runs:
   using: 'node12'
   main: 'dist/index.js'

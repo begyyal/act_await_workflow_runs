@@ -5,6 +5,7 @@ const WF_NAME = core.getInput('workflowName');
 const TIMEOUT_MSEC = core.getInput('timeoutSec') * 1000;
 const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
 const INTERVAL_SEC = core.getInput('intervalSec');
+const NUM_OF_REF = core.getInput('numOfRef');
 
 const RETRY_COUNT = 3;
 const STR = {
@@ -24,15 +25,18 @@ async function getWorkflowIds() {
 
   // completed以外でのフィルタリングを嫌気してのこれ
   // https://github.com/begyyal/act_await_wf_execution/issues/1
-  let runs, allRuns = [], count = 1;
+  let runs, allRuns = [], pageCount = 1, count = NUM_OF_REF;
   do {
-    runs = (await owata_(request(API_PATH, newConf(count++), RETRY_COUNT)))
+    runs = (await owata_(request(
+        API_PATH, 
+        newConf(pageCount++, count > 100 ? 100 : count), 
+        RETRY_COUNT)))
       .data.workflow_runs
       .filter(wfr => wfr.status != STR.completed && (!WF_NAME || wfr.name == WF_NAME));
     Array.prototype.push.apply(allRuns, runs);
-  } while (runs.length == 30);
+  } while ((count -= 100) > 0);
 
-  return runs.map(wfr => wfr.id);
+  return allRuns.map(wfr => wfr.id);
 }
 
 async function checkCompletion(ids) {
@@ -67,7 +71,7 @@ function sleep(sec) {
   return new Promise((resolve) => setTimeout(resolve, sec * 1000));
 }
 
-function newConf(page) {
+function newConf(page, per_page) {
 
   const conf = {
     baseURL: 'https://api.github.com/',
@@ -78,7 +82,10 @@ function newConf(page) {
   };
 
   if (page)
-    conf.params = { page: page };
+    conf.params = { 
+      per_page: per_page,
+      page: page 
+    };
 
   return conf;
 }
