@@ -21,5 +21,7 @@
     "@actions/core": "^1.4.0",
     "axios": "^0.21.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@vercel/ncc": "^0.30.0"
+  }
 }

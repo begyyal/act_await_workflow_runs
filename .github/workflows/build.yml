@@ -29,7 +29,6 @@ jobs:
     - name: build
       run: |
         npm i
-        npm i -g @vercel/ncc
         npm run build
       
     - name: Push if needed
