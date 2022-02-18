@@ -20,7 +20,7 @@ inputs:
       Authorization token such as a github_token or PAT.
   timeoutSec:
     required: false
-    default: 180
+    default: 600
     description: >
       Timeout secounds of total execution time.
   intervalSec:
