@@ -1,4 +1,5 @@
 const core = require('@actions/core');
+const github = require('@actions/github');
 const axios = require('axios');
 
 const WF_NAME = core.getInput('workflowName');
@@ -6,6 +7,7 @@ const TIMEOUT_MSEC = core.getInput('timeoutSec') * 1000;
 const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
 const INTERVAL_SEC = core.getInput('intervalSec');
 const NUM_OF_REF = core.getInput('numOfRef');
+const CHECK_SELF = !WF_NAME || github.workflow == WF_NAME;
 
 const RETRY_COUNT = 3;
 const STR = {
@@ -28,15 +30,17 @@ async function getWorkflowIds() {
   let runs, allRuns = [], pageCount = 1, count = NUM_OF_REF;
   do {
     runs = (await owata_(request(
-        API_PATH, 
-        newConf(pageCount++, count > 100 ? 100 : count), 
-        RETRY_COUNT)))
+      API_PATH,
+      newConf(pageCount++, count > 100 ? 100 : count),
+      RETRY_COUNT)))
       .data.workflow_runs
       .filter(wfr => wfr.status != STR.completed && (!WF_NAME || wfr.name == WF_NAME));
     Array.prototype.push.apply(allRuns, runs);
   } while ((count -= 100) > 0);
 
-  return allRuns.map(wfr => wfr.id);
+  return CHECK_SELF
+    ? allRuns.filter(wfr => wfr.run_number < github.run_number).map(wfr => wfr.id)
+    : allRuns.map(wfr => wfr.id);
 }
 
 async function checkCompletion(ids) {
@@ -82,9 +86,9 @@ function newConf(page, per_page) {
   };
 
   if (page)
-    conf.params = { 
+    conf.params = {
       per_page: per_page,
-      page: page 
+      page: page
     };
 
   return conf;
