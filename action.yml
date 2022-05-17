@@ -1,12 +1,12 @@
-name: 'Await workflow executions'
-description: 'Wait for workflow executions to complete.'
+name: 'Await workflow runs'
+description: 'Wait for workflow runs to complete.'
 
 inputs:
   workflowName:
     required: false
     default: ''
     description: >
-      A workflow name of the execution target.  
+      A workflow name of the targets that make wait.  
       By the default, all runs are targeted.
   repos:
     required: false

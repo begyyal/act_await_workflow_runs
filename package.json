@@ -1,22 +1,22 @@
 {
-  "name": "act_await_wf_execution",
+  "name": "act_await_wf_runs",
   "version": "1.0.0",
-  "description": "Wait for the workflow execution to complete or start.",
+  "description": "Wait for the workflow runs to complete or start.",
   "main": "main.js",
   "scripts": {
     "build": "ncc build --license LICENSE"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/begyyal/act_await_wf_execution.git"
+    "url": "git+https://github.com/begyyal/act_await_wf_runs.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/begyyal/act_await_wf_execution/issues"
+    "url": "https://github.com/begyyal/act_await_wf_runs/issues"
   },
-  "homepage": "https://github.com/begyyal/act_await_wf_execution#readme",
+  "homepage": "https://github.com/begyyal/act_await_wf_runs#readme",
   "dependencies": {
     "@actions/core": "^1.4.0",
     "@actions/github": "^5.0.3",
