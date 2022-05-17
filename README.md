@@ -1,4 +1,4 @@
-[![build](https://github.com/begyyal/act_await_wf_runs/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/begyyal/act_await_wf_runs/actions/workflows/build.yml)
+[![build](https://github.com/begyyal/act_await_workflow_runs/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/begyyal/act_await_workflow_runs/actions/workflows/build.yml)
 
 # Overview
 
@@ -7,7 +7,7 @@ Wait for workflow runs specified at inputs to complete.
 
 ## Format
 
-- [Action's format including inputs.](https://github.com/begyyal/act_await_wf_runs/blob/master/action.yml)
+- [Action's format including inputs.](https://github.com/begyyal/act_await_workflow_runs/blob/master/action.yml)
 
 ## Behavier
 
