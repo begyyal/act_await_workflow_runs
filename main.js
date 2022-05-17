@@ -7,7 +7,7 @@ const TIMEOUT_MSEC = core.getInput('timeoutSec') * 1000;
 const API_PATH = '/repos/' + core.getInput('repos') + '/actions/runs';
 const INTERVAL_SEC = core.getInput('intervalSec');
 const NUM_OF_REF = core.getInput('numOfRef');
-const CHECK_SELF = !WF_NAME || github.workflow == WF_NAME;
+const CHECK_SELF = !WF_NAME || github.context.workflow == WF_NAME;
 
 const RETRY_COUNT = 3;
 const STR = {
@@ -39,7 +39,7 @@ async function getWorkflowIds() {
   } while ((count -= 100) > 0);
 
   return CHECK_SELF
-    ? allRuns.filter(wfr => wfr.run_number < github.run_number).map(wfr => wfr.id)
+    ? allRuns.filter(wfr => wfr.run_number < github.context.runNumber).map(wfr => wfr.id)
     : allRuns.map(wfr => wfr.id);
 }
 
