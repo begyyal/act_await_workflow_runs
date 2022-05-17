@@ -11015,7 +11015,7 @@ function owata_(promise) {
 async function getWorkflowIds() {
 
   // completed以外でのフィルタリングを嫌気してのこれ
-  // https://github.com/begyyal/act_await_wf_execution/issues/1
+  // https://github.com/begyyal/act_await_wf_runs/issues/1
   let runs, allRuns = [], pageCount = 1, count = NUM_OF_REF;
   do {
     runs = (await owata_(request(
